@@ -7,7 +7,6 @@ import React, { useState } from "react";
 import {
   BrowserRouter as Router,
   Route,
-  //Link,
   Routes
 } from "react-router-dom";
 
@@ -15,12 +14,14 @@ function App() {
   const [mode, changeMode] = useState("light");
   const [alert, setAlert] = useState(null);
   const [blMode, setBlMode] = useState("light");
+  
   const showAlert = (message, type) => {
     setAlert({
       msg: message,
       type: type,
     });
   };
+  
   const myMode = function () {
     if (mode === "light") {
       changeMode("dark");
@@ -32,6 +33,7 @@ function App() {
       showAlert("Light mode has been Enabled", "success");
     }
   };
+  
   const BlueMode = function () {
     console.log("blue called");
     if (blMode === "light") {
@@ -50,29 +52,31 @@ function App() {
 
   return (
     <>
-    <Router>
-      <Navbar
-        title="Text Box"
-        title1="Dark Form"
-        mode={mode}
-        toogleMode={myMode}
-        blueFunc={BlueMode}
-        blMode={blMode}
-      />
+      <Router>
+        <Navbar
+          title="Text Box"
+          title1="Dark Form"
+          mode={mode}
+          toogleMode={myMode}
+          blueFunc={BlueMode}
+          blMode={blMode}
+        />
 
-      <Alert alert={alert} mode={mode}
-        toogleMode={myMode}
-        blueFunc={BlueMode}
-        blMode={blMode} />
+        <Alert
+          alert={alert}
+          mode={mode}
+          toogleMode={myMode}
+          blueFunc={BlueMode}
+          blMode={blMode}
+        />
      
         <div className="container">
-        <Routes>
-          <Route path='/textform' element={<TextForms mode={mode} blMode={blMode} showAlert={showAlert} />} />
-          <Route path='/' element={<DarkForm />} />
-        </Routes>
+          <Routes>
+            <Route path='/textform' element={<TextForms mode={mode} blMode={blMode} showAlert={showAlert} />} />
+            <Route path='/' element={<DarkForm />} />
+          </Routes>
         </div>
-        </Router>
-
+      </Router>
     </>
   );
 }
